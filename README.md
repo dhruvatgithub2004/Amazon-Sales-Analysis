@@ -6,49 +6,49 @@ This project performs an exploratory data analysis and statistical testing on an
 
 ## Data
 
-The analysis is based on the dataset located at `C:\Users\dkdes\OneDrive\Desktop\kaggle_datasets\Amazon Sale Report.csv` [1, 2].
+The analysis is based on the dataset located at `C:\Users\dkdes\OneDrive\Desktop\kaggle_datasets\Amazon Sale Report.csv`.
 
-The raw dataset initially contains 128,975 entries and 24 columns [3]. After cleaning and preparation, the dataset used for analysis comprises 118,837 entries and 15 columns [4].
+The raw dataset initially contains 128,975 entries and 24 columns . After cleaning and preparation, the dataset used for analysis comprises 118,837 entries and 15 columns .
 
 ## Libraries Used
 
 The analysis was performed using the following Python libraries:
-*   `pandas` for data manipulation and analysis [2, 5-9]
-*   `seaborn` for data visualization [2, 10-15]
-*   `matplotlib.pyplot` for plotting [2, 11, 13-15]
-*   `scipy.stats` for statistical testing (ANOVA and t-tests) [5-9]
+*   `pandas` for data manipulation and analysis
+*   `seaborn` for data visualization
+*   `matplotlib.pyplot` for plotting
+*   `scipy.stats` for statistical testing (ANOVA and t-tests)
 
 ## Analysis Steps and Highlights
 
 The analysis involved several key steps:
 
 1.  **Data Loading and Initial Inspection:**
-    *   The dataset was loaded using pandas [1, 2]. A `DtypeWarning` was noted for column 23 due to mixed types [1].
-    *   Initial inspection included viewing the first few rows (`df.head()`), checking data types and non-null counts (`df.info()`), and generating descriptive statistics (`df.describe()`, `df.isnull().sum()`) [2, 16, 17].
+    *   The dataset was loaded using pandas. A `DtypeWarning` was noted for column 23 due to mixed types.
+    *   Initial inspection included viewing the first few rows (`df.head()`), checking data types and non-null counts (`df.info()`), and generating descriptive statistics (`df.describe()`, `df.isnull().sum()`).
 
 2.  **Data Cleaning and Preparation:**
-    *   Several columns deemed irrelevant for the analysis were dropped [17]. The final columns retained include: 'Date', 'Status', 'Fulfilment', 'ship-service-level', 'Category', 'Size', 'Courier Status', 'Qty', 'Amount', 'ship-city', 'ship-state', 'B2B' [4]. New columns 'Day', 'Month', and 'Year' were extracted from the 'Date' column after converting it to datetime objects [17].
-    *   Rows with missing 'Amount' values were removed [18].
-    *   Rows where the 'Amount' was 0 were removed [18].
-    *   Missing values in the 'ship-state' column were filled with "Unknown" [19]. State names were converted to lowercase [19].
-    *   Missing values in the 'Courier Status' column were filled with "Unknown" [20].
-    *   The 'ship-state' value 'nl' was replaced with 'nagaland' [21].
+    *   Several columns deemed irrelevant for the analysis were dropped. The final columns retained include: 'Date', 'Status', 'Fulfilment', 'ship-service-level', 'Category', 'Size', 'Courier Status', 'Qty', 'Amount', 'ship-city', 'ship-state', 'B2B'. New columns 'Day', 'Month', and 'Year' were extracted from the 'Date' column after converting it to datetime objects.
+    *   Rows with missing 'Amount' values were removed.
+    *   Rows where the 'Amount' was 0 were removed.
+    *   Missing values in the 'ship-state' column were filled with "Unknown". State names were converted to lowercase.
+    *   Missing values in the 'Courier Status' column were filled with "Unknown".
+    *   The 'ship-state' value 'nl' was replaced with 'nagaland'.
 
 3.  **Exploratory Data Analysis (EDA):**
-    *   Visualizations were created to understand the distribution of `Amount` (histogram and boxplot) [17, 18].
-    *   Value counts were analysed for key categorical columns like 'Courier Status' [17, 20, 22], 'Status' [22], 'Size' [23], and 'Category' [24].
-    *   Sales amount was analysed by 'Size' and 'Category' by calculating the mean amount for each group and visualising with bar plots [21, 23, 25].
-    *   Total quantity sold was summed by 'Category' [24].
-    *   Total sales amount was aggregated and sorted by 'ship-state' [20] and 'ship-city' [20, 21, ..., 106].
-        *   **Maharashtra** recorded the highest total sales amount by state [20].
-        *   **Bengaluru** recorded the highest total sales amount by city [26].
-    *   Shipment counts by state were analysed for specific categories like "Top", "Set", "Western Dress", etc., using bar plots [10-15].
-    *   Categories of cancelled orders were specifically counted [20]. **Set** and **kurta** were the categories with the highest number of cancelled orders [20].
+    *   Visualizations were created to understand the distribution of `Amount` (histogram and boxplot).
+    *   Value counts were analysed for key categorical columns like 'Courier Status', 'Status', 'Size', and 'Category'.
+    *   Sales amount was analysed by 'Size' and 'Category' by calculating the mean amount for each group and visualising with bar plots.
+    *   Total quantity sold was summed by 'Category'.
+    *   Total sales amount was aggregated and sorted by 'ship-state' and 'ship-city'.
+        *   **Maharashtra** recorded the highest total sales amount by state.
+        *   **Bengaluru** recorded the highest total sales amount by city.
+    *   Shipment counts by state were analysed for specific categories like "Top", "Set", "Western Dress", etc., using bar plots.
+    *   Categories of cancelled orders were specifically counted. **Set** and **kurta** were the categories with the highest number of cancelled orders.
 
 4.  **Statistical Analysis:**
-    *   An ANOVA test was performed on the 'Amount' for the top 5 states by data count [5]. The F-Statistic and P-Value variables were printed [5], although the output interpretation specific to the ANOVA is not shown.
-    *   An independent two-sample t-test (Welch’s t-test) was conducted to compare the average sales amounts between 'Shipped' and 'Unshipped' orders based on 'Courier Status' [6-8]. The T-Statistic was -0.563 and the P-Value was 0.573 [6, 8]. Based on this P-Value, the analysis concluded there is **no significant difference** in sales amount between shipped and unshipped orders [6, 9].
-    *   An independent two-sample t-test (Welch’s t-test) was conducted to compare the average sales amounts between B2B and B2C orders [9, 27]. The analysis printed a T-Statistic of -0.563 and a P-Value of 0.573 [9, 27]. However, the source separately stated that there is a **significant difference** in sales amount between B2B and B2C orders [27]. *Note: The printed P-Value of 0.573 is typically interpreted as indicating no significant difference (p > 0.05), which appears to contradict the explicit conclusion of significant difference stated in the source [27].*
+    *   An ANOVA test was performed on the 'Amount' for the top 5 states by data count. The F-Statistic and P-Value variables were printed, although the output interpretation specific to the ANOVA is not shown.
+    *   An independent two-sample t-test (Welch’s t-test) was conducted to compare the average sales amounts between 'Shipped' and 'Unshipped' orders based on 'Courier Status' [6-8]. The T-Statistic was -0.563 and the P-Value was 0.573. Based on this P-Value, the analysis concluded there is **no significant difference** in sales amount between shipped and unshipped orders.
+    *   An independent two-sample t-test (Welch’s t-test) was conducted to compare the average sales amounts between B2B and B2C orders. The analysis printed a T-Statistic of -0.563 and a P-Value of 0.573. However, the source separately stated that there is a **significant difference** in sales amount between B2B and B2C orders .
 
 ## Getting Started
 
